@@ -18,7 +18,6 @@ link_directories(cs140/lib/${PLATFORM})
 link_libraries(gtests pthread)
 add_executable(${EXEC_NAME}_GTest src/${SOURCE_PREFIX}_unittest.cc $<TARGET_OBJECTS:${EXEC_NAME}Obj>)
 
-add_custom_target(submodule-update ALL git submodule init COMMAND git submodule update --recursive WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 add_custom_command(OUTPUT ${CMAKE_HOME_DIRECTORY}/.git/hooks/pre-push COMMAND cp ARGS githooks/pre-push .git/hooks WORKING_DIRECTORY ${CMAKE_HOME_DIRECTORY})
 add_custom_target(pre-push-script ALL DEPENDS ${CMAKE_HOME_DIRECTORY}/.git/hooks/pre-push)
 add_custom_command(OUTPUT ${CMAKE_HOME_DIRECTORY}/.git/hooks/pre-commit COMMAND cp ARGS githooks/pre-commit .git/hooks WORKING_DIRECTORY ${CMAKE_HOME_DIRECTORY})
@@ -26,5 +25,5 @@ add_custom_target(pre-commit-script ALL DEPENDS ${CMAKE_HOME_DIRECTORY}/.git/hoo
 add_custom_command(OUTPUT ${CMAKE_HOME_DIRECTORY}/.git/hooks/project.py COMMAND cp ARGS .githooks/project.py .git/hooks WORKING_DIRECTORY ${CMAKE_HOME_DIRECTORY})
 add_custom_target(project-config ALL DEPENDS ${CMAKE_HOME_DIRECTORY}/.git/hooks/project.py)
 
-add_dependencies(${EXEC_NAME}_GTest ${EXEC_NAME}Obj pre-push-script pre-commit-script project-config submodule-update)
-add_dependencies(${EXEC_NAME} pre-push-script pre-commit-script project-config submodule-update)
+add_dependencies(${EXEC_NAME}_GTest ${EXEC_NAME}Obj pre-push-script pre-commit-script project-config)
+add_dependencies(${EXEC_NAME} pre-push-script pre-commit-script project-config)

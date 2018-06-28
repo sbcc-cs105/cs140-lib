@@ -15,7 +15,7 @@ add_library(${EXEC_NAME}Obj OBJECT ${ASSIGNMENT_SOURCES})
 target_compile_options(${EXEC_NAME}Obj PRIVATE -Dmain=_main)
 
 link_directories(cs140/lib/${PLATFORM})
-link_libraries(gtests pthread)
+link_libraries(gtestd gtest_maind pthread)
 add_executable(${EXEC_NAME}_GTest src/${SOURCE_PREFIX}_unittest.cc $<TARGET_OBJECTS:${EXEC_NAME}Obj>)
 
 add_custom_command(OUTPUT ${CMAKE_HOME_DIRECTORY}/.git/hooks/pre-push COMMAND cp ARGS githooks/pre-push .git/hooks WORKING_DIRECTORY ${CMAKE_HOME_DIRECTORY})

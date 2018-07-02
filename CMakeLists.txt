@@ -12,11 +12,12 @@ add_executable(${EXEC_NAME} ${ASSIGNMENT_SOURCES} ${ASSIGNMENT_INCLUDES})
 include_directories(include/ cs140/include)
 
 add_library(${EXEC_NAME}Obj OBJECT ${ASSIGNMENT_SOURCES})
-target_compile_options(${EXEC_NAME}Obj PRIVATE -Dmain=_main)
+target_compile_options(${EXEC_NAME}Obj PRIVATE -Dmain=_main -D_GLIBCXX_USE_CXX11_ABI=0)
 
 link_directories(cs140/lib/${PLATFORM})
 link_libraries(gtestd gtest_maind pthread)
 add_executable(${EXEC_NAME}_GTest src/${SOURCE_PREFIX}_unittest.cc $<TARGET_OBJECTS:${EXEC_NAME}Obj>)
+target_compile_options(${EXEC_NAME}_GTest PRIVATE -D_GLIBCXX_USE_CXX11_ABI=0)
 
 add_custom_command(OUTPUT ${CMAKE_HOME_DIRECTORY}/.git/hooks/pre-push COMMAND cp ARGS githooks/pre-push .git/hooks WORKING_DIRECTORY ${CMAKE_HOME_DIRECTORY})
 add_custom_target(pre-push-script ALL DEPENDS ${CMAKE_HOME_DIRECTORY}/.git/hooks/pre-push)

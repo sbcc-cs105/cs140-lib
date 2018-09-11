@@ -80,7 +80,7 @@ def sync_the_fork():
     return True
 
 GITHUB_URL = 'https://www.github.com/'
-REPO_NAME = (project.ASSIGNMENT_NUM + '-' + project.ASSIGNMENT_NAME).lower()
+REPO_NAME = (project.COURSE_NUM + '-' + project.ASSIGNMENT_NUM + '-' + project.ASSIGNMENT_NAME).lower()
 UPSTREAM_URL = GITHUB_URL + project.GITHUB_ORGANIZATION + '/' + REPO_NAME
 UPSTREAM_NAME = 'upstream'
 

@@ -52,7 +52,7 @@ def check_if_pull_needed():
 
 
 def check_for_upstream_remote():
-    res, text = use('git remote get-url ' + UPSTREAM_NAME, True)
+    res, text = use('git ls-remote --get-url ' + UPSTREAM_NAME, True)
     return res is None
 
 

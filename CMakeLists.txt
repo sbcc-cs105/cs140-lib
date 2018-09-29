@@ -28,7 +28,9 @@ add_executable(${EXEC_NAME}_GTest src/${SOURCE_PREFIX}_unittest.cc ${ASSIGNMENT_
 
 if(NOT ${CMAKE_CXX_COMPILER_VERSION} VERSION_EQUAL 4.8.4)
     target_compile_options(${EXEC_NAME}_GTest PRIVATE -D_GLIBCXX_USE_CXX11_ABI=0)
-    target_link_libraries(${EXEC_NAME}_GTest -no-pie)
+    if(NOT APPLE)
+        target_link_libraries(${EXEC_NAME}_GTest -no-pie)
+    endif()
 endif()
 
 if(WIN32)
